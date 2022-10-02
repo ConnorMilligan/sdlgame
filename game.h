@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include "sprite.h"
 
 enum class gameState {PLAY, EXIT};
 
@@ -12,6 +13,7 @@ private:
     int screenWidth;
     int screenHeight;
     gameState currState;
+    Sprite sprite;
 
     void init();
     void processInput();
