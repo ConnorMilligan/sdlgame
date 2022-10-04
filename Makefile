@@ -2,9 +2,9 @@ SHELL = /bin/sh
 
 CC=g++
 CFLAGS=-Wall -g
-DEPS = game.h sprite.h
-OBJ = main.o game.o sprite.o
-LIBS = -lSDL2 -lGLEW -lGL
+DEPS = 
+OBJ = main.o 
+LIBS = -lSDL2 
 
 %.o: %.c ${DEPS}
 	${CC} -c -o $@ $< ${CFLAGS}
