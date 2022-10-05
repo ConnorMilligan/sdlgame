@@ -4,11 +4,11 @@ CC=g++
 CFLAGS=-Wall -g
 DEPS = 
 OBJ = main.o 
+LIBS = -lSDL2
 
+# Add required compiler flags for windows mingw
 ifeq ($(OS),Windows_NT)
-	LIBS = -lmingw32 -lSDL2main -lSDL2 -mwindows
-else 
-	LIBS = -lSDL2
+	LIBS += -lmingw32 -lSDL2main -mwindows
 endif
 
 %.o: %.c ${DEPS}
