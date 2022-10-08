@@ -13,6 +13,8 @@ bool loadMedia();
 void close();
 
 int main(int argc, char** args) {
+	
+
 	if (!init()) {
 		printf("Failed to initialize!\n");
 	}
@@ -21,9 +23,18 @@ int main(int argc, char** args) {
 			printf("Failed to load media!\n");
 		}
 		else {
-			SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
-			SDL_UpdateWindowSurface(gWindow);
-			SDL_Delay(2000);
+			bool quit = false;
+			SDL_Event e;
+
+			while (!quit) {
+				while(SDL_PollEvent( &e ) != 0) {
+                    //User requests quit
+                    if( e.type == SDL_QUIT )
+                        quit = true;
+                }
+				SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
+				SDL_UpdateWindowSurface(gWindow);
+			}
 		}
 	}
 	
