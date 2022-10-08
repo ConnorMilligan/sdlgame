@@ -8,7 +8,7 @@ LIBS = -lSDL2
 
 # Add required compiler flags for windows mingw
 ifeq ($(OS),Windows_NT)
-	LIBS += -lmingw32 -lSDL2main -mwindows
+	LIBS = -lmingw32 -lSDL2main -lSDL2 -mwindows
 endif
 
 %.o: %.c ${DEPS}
