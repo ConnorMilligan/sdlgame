@@ -1,7 +1,1 @@
-main
-main.exe
-*.o
-CMakeFiles/
-cmake_install.cmake
-CMakeCache.txt
-Makefile
+*/build/
