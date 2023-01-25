@@ -36,5 +36,5 @@ source_group("Sources" FILES ${PROJECT_SOURCES})
 # Build the source files
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS} ${PROJECT_CONFIGS})
 
-# Link freeGLUT to the executable
+# Link SDL to the executable
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})

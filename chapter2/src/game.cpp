@@ -4,6 +4,7 @@
 
 Game::Game() {
     this->m_bRunning = false;
+    this->m_textureManager = TextureManager();
 }
 
 bool Game::init(const char *title, int xpos, int ypos, int width, int height, int flags) {
@@ -20,7 +21,7 @@ bool Game::init(const char *title, int xpos, int ypos, int width, int height, in
 
             if(m_pRenderer != 0) {
                 std::cout << "Renderer creation success" << std::endl;
-                SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+                SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
             } else {
                 std::cout << "Renderer init failed" << std::endl;
                 return false;
@@ -38,30 +39,23 @@ bool Game::init(const char *title, int xpos, int ypos, int width, int height, in
     this->m_bRunning = true;
 
     // load texture
-    SDL_Surface *pTempSurface = SDL_LoadBMP("../../res/rider.bmp");
-    this->m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-    SDL_FreeSurface(pTempSurface);
-
-    // set to rectangle
-    SDL_QueryTexture(this->m_pTexture, NULL, NULL, &this->m_sourceRectangle.w, &this->m_sourceRectangle.h);
-
-    this->m_destRectangle.x = this->m_sourceRectangle.x = 0;
-    this->m_destRectangle.y = this->m_sourceRectangle.y = 0;
-
-    this->m_destRectangle.w = this->m_sourceRectangle.w;
-    this->m_destRectangle.h = this->m_sourceRectangle.h;
+    this->m_textureManager.load("../../animate-alpha.png", "animate", m_pRenderer);
 
     return true;
 }
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer); // clear
-    SDL_RenderCopy(this->m_pRenderer, this->m_pTexture, &this->m_sourceRectangle, &this->m_destRectangle);
+
+    this->m_textureManager.draw("animate", 0, 0, 128, 82, this->m_pRenderer);
+    this->m_textureManager.drawFrame("animate", 100, 100, 128, 82, 1, this->m_currentFrame, this->m_pRenderer);
+
+
     SDL_RenderPresent(m_pRenderer); // draw
 }
 
 void Game::update() {
-
+    this->m_currentFrame = 128 * int(((SDL_GetTicks() / 100) %6));
 }
 
 void Game::handleEvents() {
