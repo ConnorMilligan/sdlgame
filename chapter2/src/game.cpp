@@ -2,10 +2,7 @@
 
 #include <iostream>
 
-Game::Game() {
-    this->m_bRunning = false;
-    this->m_textureManager = TextureManager();
-}
+Game::Game() {}
 
 bool Game::init(const char *title, int xpos, int ypos, int width, int height, int flags) {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -39,7 +36,8 @@ bool Game::init(const char *title, int xpos, int ypos, int width, int height, in
     this->m_bRunning = true;
 
     // load texture
-    this->m_textureManager.load("../../animate-alpha.png", "animate", m_pRenderer);
+    if (!TheTextureManager::Instance()->load("../../res/animate-alpha.png", "animate", m_pRenderer))
+        return false;
 
     return true;
 }
@@ -47,15 +45,15 @@ bool Game::init(const char *title, int xpos, int ypos, int width, int height, in
 void Game::render() {
     SDL_RenderClear(m_pRenderer); // clear
 
-    this->m_textureManager.draw("animate", 0, 0, 128, 82, this->m_pRenderer);
-    this->m_textureManager.drawFrame("animate", 100, 100, 128, 82, 1, this->m_currentFrame, this->m_pRenderer);
+    TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82, this->m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 1, this->m_currentFrame, this->m_pRenderer);
 
 
     SDL_RenderPresent(m_pRenderer); // draw
 }
 
 void Game::update() {
-    this->m_currentFrame = 128 * int(((SDL_GetTicks() / 100) %6));
+    this->m_currentFrame = int(((SDL_GetTicks() / 100) %6));
 }
 
 void Game::handleEvents() {
