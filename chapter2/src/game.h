@@ -27,4 +27,4 @@ class Game {
         bool running();
 };
 
-#endif // __Game__
+#endif
