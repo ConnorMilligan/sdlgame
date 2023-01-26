@@ -34,7 +34,7 @@ bool Game::init(const char *title, int xpos, int ypos, int width, int height, in
     this->m_bRunning = true;
 
     // load texture
-    if (!TheTextureManager::Instance()->load("../../res/animate-alpha.png", "animate", m_pRenderer))
+    if (!TheTextureManager::Instance()->load("../res/animate-alpha.png", "animate", m_pRenderer))
         return false;
 
     return true;
