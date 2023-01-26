@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-Game::Game() {}
-
 bool Game::init(const char *title, int xpos, int ypos, int width, int height, int flags) {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "SDL init success" << std::endl;

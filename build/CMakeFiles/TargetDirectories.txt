@@ -1,0 +1,3 @@
+/home/connor/Documents/sdlgame/build/CMakeFiles/graphics.dir
+/home/connor/Documents/sdlgame/build/CMakeFiles/edit_cache.dir
+/home/connor/Documents/sdlgame/build/CMakeFiles/rebuild_cache.dir

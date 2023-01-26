@@ -1,8 +1,5 @@
 #include "textureManager.h"
 
-TextureManager::TextureManager() {}
-TextureManager::~TextureManager() {}
-
 TextureManager* TextureManager::s_pInstance = 0;
 
 bool TextureManager::load(std::string filename, std::string id, SDL_Renderer *pRenderer) {

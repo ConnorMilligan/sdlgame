@@ -2,13 +2,14 @@
 #define TEXTUREMANAGER_H
 
 #include <SDL2/SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <string>
 #include <map>
 
 class TextureManager {
     private:
         TextureManager() {}
+        ~TextureManager() {}
         
         std::map<std::string, SDL_Texture*> m_textureMap;
         static TextureManager* s_pInstance;
