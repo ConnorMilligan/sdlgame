@@ -1,17 +1,8 @@
-[submodule "lib/SDL"]
-	path = lib/SDL
-	url = https://github.com/libsdl-org/SDL
+[submodule "lib/SDL2"]
+	path = lib/SDL2
+	url = https://github.com/libsdl-org/SDL.git
 	branch = SDL2
-[submodule "lib/SDL_image"]
-	path = lib/SDL_image
-	url = https://github.com/libsdl-org/SDL_image
+[submodule "lib/SDL2_image"]
+	path = lib/SDL2_image
+	url = https://github.com/libsdl-org/SDL_image.git
 	branch = SDL2
-[submodule "lib/sdl2-cmake-modules"]
-	path = lib/sdl2-cmake-modules
-	url = https://github.com/aminosbh/sdl2-cmake-modules.git
-[submodule "lib/sdl2-cmake-scripts"]
-	path = lib/sdl2-cmake-scripts
-	url = https://github.com/tcbrindle/sdl2-cmake-scripts.git
-[submodule "cmake"]
-	path = cmake
-	url = https://github.com/tcbrindle/sdl2-cmake-scripts.git
