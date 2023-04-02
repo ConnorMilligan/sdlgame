@@ -5,9 +5,9 @@
 
 extern bool m_bRunning;
 
-void gameInit();
+bool gameInit(const char* title, int xpos, int ypos, int width, int height, int flags);
 
-void gameRenderer();
+void gameRender();
 void gameUpdate();
 void gameHandleEvents();
 void gameClean();
