@@ -29,23 +29,13 @@ include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 
 # Set the project files
-file(GLOB PROJECT_HEADERS src/*.h)
-file(GLOB PROJECT_SOURCES src/*.c)
-file(GLOB PROJECT_CONFIGS CMakeLists.txt
-                          Readme.md
-                         .gitattributes
-                         .gitignore
-                         .gitmodules)
-
+file(GLOB PROJECT_HEADERS "src/*.h")
+file(GLOB PROJECT_SOURCES "src/*.c")
 
 source_group("Headers" FILES ${PROJECT_HEADERS})
 source_group("Sources" FILES ${PROJECT_SOURCES})
 
-# Build the source files
-add_executable(${PROJECT_NAME} 
-               ${PROJECT_SOURCES} 
-               ${PROJECT_HEADERS} 
-               ${PROJECT_CONFIGS})
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # Link SDL to the executable
 target_link_libraries(${PROJECT_NAME} 
