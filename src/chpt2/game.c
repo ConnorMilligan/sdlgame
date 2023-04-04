@@ -32,7 +32,7 @@ bool gameInit(const char* title, int xpos, int ypos, int width, int height, int 
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
 
                 // Create a texture from a surface
-                textureLoad("../res/animate.bmp", "animate", m_pRenderer);
+                textureLoad("../res/animate-alpha.png", "animate", m_pRenderer);
             } else {
                 printf("Renderer init fail\n");
                 return false;

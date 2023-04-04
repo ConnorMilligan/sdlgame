@@ -1,5 +1,8 @@
 #include "game.h"
 
+#include <string.h>
+#include <SDL_image.h>
+
 typedef struct Texture {
     char *id;
     SDL_Texture *pTexture;
@@ -11,7 +14,7 @@ int compareTextures(void *a, void *b) {
 }
 
 bool textureLoad(char *filename, char *id, SDL_Renderer *m_pRenderer) {
-    SDL_Surface *pTempSurface = SDL_LoadBMP(filename);
+    SDL_Surface *pTempSurface = IMG_Load(filename);
     if (pTempSurface == 0) {
         return false;
     }
@@ -41,7 +44,8 @@ bool textureDraw(char *id, int x, int y, int width, int height, SDL_Renderer *pR
     destRect.x = x;
     destRect.y = y;
 
-    SDL_RenderCopyEx(pRenderer, llistGetNode(&textures, compareTextures, id)->data, &srcRect, &destRect, 0, 0, flip);
+    SDL_Texture *tmpText = ((Texture*) llistGetNode(&textures, compareTextures, id)->data)->pTexture;
+    SDL_RenderCopyEx(pRenderer, tmpText, &srcRect, &destRect, 0, 0, flip);
     return true;
 }
 
@@ -56,5 +60,6 @@ void textureDrawFrame(char *id, int x, int y, int width, int height, int current
     destRect.x = x;
     destRect.y = y;
 
-    SDL_RenderCopyEx(m_pRenderer, llistGetNode(&textures, compareTextures, id)->data, &srcRect, &destRect, 0, 0, flip);
+    SDL_Texture *tmpText = ((Texture*) llistGetNode(&textures, compareTextures, id)->data)->pTexture;
+    SDL_RenderCopyEx(m_pRenderer, tmpText, &srcRect, &destRect, 0, 0, flip);
 }
