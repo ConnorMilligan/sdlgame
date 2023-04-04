@@ -6,12 +6,10 @@
 SDL_Window *m_pWindow = NULL;
 SDL_Renderer *m_pRenderer = NULL;
 
-SDL_Texture *m_pTexture;
-SDL_Rect m_sourceRectangle;
-SDL_Rect m_destinationRectangle;
-
 LinkedList textures;
 bool m_bRunning = false;
+
+int m_currentFrame;
 
 bool gameInit(const char* title, int xpos, int ypos, int width, int height, int flags) {
     if (SDL_Init(SDL_INIT_VIDEO) == 0) {
@@ -34,18 +32,7 @@ bool gameInit(const char* title, int xpos, int ypos, int width, int height, int 
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
 
                 // Create a texture from a surface
-                SDL_Surface *pTempSurface = IMG_Load("../res/animate-alpha.png");
-                m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-                SDL_FreeSurface(pTempSurface);
-
-                m_sourceRectangle.w = 128;
-                m_sourceRectangle.h = 82;
-
-                // Set position and size of sourceRect
-                m_destinationRectangle.x = m_sourceRectangle.x = 0;
-                m_destinationRectangle.y = m_destinationRectangle.y = 0;
-                m_destinationRectangle.w = m_sourceRectangle.w;
-                m_destinationRectangle.h = m_sourceRectangle.h;
+                textureLoad("../res/animate.bmp", "animate", m_pRenderer);
             } else {
                 printf("Renderer init fail\n");
                 return false;
@@ -72,16 +59,15 @@ void gameRender() {
     SDL_RenderClear(m_pRenderer);
 
     // Render texture
-    SDL_RenderCopyEx(m_pRenderer, m_pTexture, 
-        &m_sourceRectangle, &m_destinationRectangle,
-        0, 0, SDL_FLIP_HORIZONTAL);
+    textureDraw("animate", 0, 0, 128, 82, m_pRenderer, SDL_FLIP_NONE);
+    textureDrawFrame("animate", 100, 100, 128, 82, 1, m_currentFrame, m_pRenderer, SDL_FLIP_NONE);
 
     // draw to the screen
     SDL_RenderPresent(m_pRenderer);
 }
 
 void gameUpdate() {
-    m_sourceRectangle.x = 128 * (int) ((SDL_GetTicks() / 100) % 6);
+    m_currentFrame = (int) ((SDL_GetTicks() / 100) % 6);
 }
 
 void gameHandleEvents() {
@@ -100,6 +86,9 @@ void gameHandleEvents() {
 
 void gameClean() {
     printf("Cleaning game\n");
+
+    llistDestroy(&textures);
+
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();

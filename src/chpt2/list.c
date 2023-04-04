@@ -42,8 +42,21 @@ void llistDelete(LinkedList *list, Node *node) {
         }
     }
     
+    free(node->data);
     free(node);
     list->size--;
+}
+
+void llistDestroy(LinkedList *list) {
+    Node *current = list->head;
+    while (current != NULL) {
+        Node *temp = current;
+        current = current->next;
+        free(temp->data);
+        free(temp);
+    }
+    list->head = NULL;
+    list->tail = NULL;
 }
 
 Node* llistPop(LinkedList *list) {
