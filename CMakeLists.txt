@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -Wall")
 
 # Chapter to compile
-set(CHAPTER "chpt2")
+set(CHAPTER "chpt3")
 
 # Checks to see if git is present
 find_package(Git REQUIRED)
